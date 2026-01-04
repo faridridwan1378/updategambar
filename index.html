@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Mengakses Gambar dari GitHub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-12">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <div class="inline-block p-4 bg-white/10 rounded-full mb-4">
+                <i class="fab fa-github text-5xl"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Mengakses Gambar dari GitHub</h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Panduan lengkap cara menggunakan gambar yang disimpan di repository GitHub</p>
+        </header>
+
+        <!-- Method Cards -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- Method 1 -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-purple-400 transition-all">
+                <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-link text-green-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">1. Raw GitHub URL</h3>
+                <p class="text-gray-300 mb-4">Cara paling umum menggunakan URL raw dari GitHub</p>
+                <div class="bg-black/30 rounded-lg p-3 text-sm font-mono overflow-x-auto">
+                    <code class="text-green-400">https://raw.githubusercontent.com/<span class="text-yellow-300">{username}</span>/<span class="text-yellow-300">{repo}</span>/<span class="text-yellow-300">{branch}</span>/<span class="text-yellow-300">{path}</span></code>
+                </div>
+            </div>
+
+            <!-- Method 2 -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-purple-400 transition-all">
+                <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-globe text-blue-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">2. GitHub Pages</h3>
+                <p class="text-gray-300 mb-4">Jika repository mengaktifkan GitHub Pages</p>
+                <div class="bg-black/30 rounded-lg p-3 text-sm font-mono overflow-x-auto">
+                    <code class="text-blue-400">https://<span class="text-yellow-300">{username}</span>.github.io/<span class="text-yellow-300">{repo}</span>/<span class="text-yellow-300">{path}</span></code>
+                </div>
+            </div>
+
+            <!-- Method 3 -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-purple-400 transition-all">
+                <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-bolt text-orange-400 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">3. jsDelivr CDN</h3>
+                <p class="text-gray-300 mb-4">Menggunakan CDN untuk performa lebih baik</p>
+                <div class="bg-black/30 rounded-lg p-3 text-sm font-mono overflow-x-auto">
+                    <code class="text-orange-400">https://cdn.jsdelivr.net/gh/<span class="text-yellow-300">{user}</span>/<span class="text-yellow-300">{repo}</span>@<span class="text-yellow-300">{branch}</span>/<span class="text-yellow-300">{path}</span></code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Browser - NEW FEATURE -->
+        <div class="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl p-8 border border-cyan-500/30 mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i class="fas fa-images text-cyan-400"></i>
+                Lihat Semua Gambar di Direktori GitHub
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Username GitHub</label>
+                    <input type="text" id="browseUsername" placeholder="contoh: microsoft" value="faridridwan1378"
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-400 transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Nama Repository</label>
+                    <input type="text" id="browseRepo" placeholder="contoh: vscode" value="varsha-catalog"
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-400 transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Branch</label>
+                    <input type="text" id="browseBranch" placeholder="main atau master" value="main"
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-400 transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Path Direktori (opsional)</label>
+                    <input type="text" id="browsePath" placeholder="images atau assets/img" value="gambar buah"
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-400 transition-all">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button onclick="browseImages()" 
+                    class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 px-8 py-3 rounded-lg font-semibold transition-all flex items-center gap-2">
+                    <i class="fas fa-search"></i>
+                    Cari Gambar
+                </button>
+                <button onclick="loadExample()" 
+                    class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-lg font-semibold transition-all flex items-center gap-2 border border-white/20">
+                    <i class="fas fa-flask"></i>
+                    Coba Contoh
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div id="browseLoading" class="hidden text-center py-8">
+                <i class="fas fa-spinner fa-spin text-4xl text-cyan-400 mb-4"></i>
+                <p class="text-gray-300">Memuat gambar dari GitHub...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="browseError" class="hidden bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-center">
+                <i class="fas fa-exclamation-triangle text-red-400 text-2xl mb-2"></i>
+                <p id="errorMessage" class="text-red-300"></p>
+            </div>
+
+            <!-- Results -->
+            <div id="browseResults" class="hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-300">
+                        <i class="fas fa-folder-open text-yellow-400 mr-2"></i>
+                        <span id="currentPath">Hasil:</span>
+                    </h3>
+                    <span id="imageCount" class="bg-cyan-500/30 text-cyan-300 px-3 py-1 rounded-full text-sm"></span>
+                </div>
+
+                <!-- Breadcrumb Navigation -->
+                <div id="breadcrumb" class="flex flex-wrap items-center gap-2 mb-4 text-sm"></div>
+
+                <!-- Folders -->
+                <div id="folderList" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-6"></div>
+
+                <!-- Images Grid -->
+                <div id="imageGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"></div>
+
+                <!-- No Images Found -->
+                <div id="noImages" class="hidden text-center py-8 text-gray-400">
+                    <i class="fas fa-image text-4xl mb-3 opacity-50"></i>
+                    <p>Tidak ada gambar ditemukan di direktori ini</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Modal -->
+        <div id="imageModal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4" onclick="closeModal(event)">
+            <div class="relative max-w-5xl max-h-full">
+                <button onclick="closeModalBtn()" class="absolute -top-12 right-0 text-white hover:text-gray-300 text-xl">
+                    <i class="fas fa-times"></i> Tutup
+                </button>
+                <img id="modalImage" src="" alt="" class="max-w-full max-h-[80vh] rounded-lg shadow-2xl">
+                <div class="mt-4 bg-black/50 rounded-lg p-4">
+                    <p id="modalFileName" class="font-semibold text-lg mb-2"></p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="copyModalUrl()" class="bg-green-500/20 hover:bg-green-500/30 text-green-400 px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fas fa-copy"></i> Copy URL
+                        </button>
+                        <a id="modalDownload" href="" download class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                        <a id="modalOpen" href="" target="_blank" class="bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fas fa-external-link"></i> Buka di Tab Baru
+                        </a>
+                    </div>
+                    <div class="mt-3">
+                        <code id="modalUrl" class="text-xs text-gray-400 break-all"></code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- URL Generator -->
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i class="fas fa-magic text-purple-400"></i>
+                Generator URL Gambar GitHub
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Username GitHub</label>
+                    <input type="text" id="username" placeholder="contoh: octocat" 
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-400 transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Nama Repository</label>
+                    <input type="text" id="repo" placeholder="contoh: my-project" 
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-400 transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Branch</label>
+                    <input type="text" id="branch" placeholder="main atau master" value="main"
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-400 transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Path ke Gambar</label>
+                    <input type="text" id="path" placeholder="images/logo.png" 
+                        class="w-full bg-black/30 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-400 transition-all">
+                </div>
+            </div>
+
+            <button onclick="generateURLs()" 
+                class="w-full md:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-8 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
+                <i class="fas fa-wand-magic-sparkles"></i>
+                Generate URL
+            </button>
+
+            <!-- Results -->
+            <div id="results" class="hidden mt-8 space-y-4">
+                <h3 class="text-lg font-semibold text-gray-300">Hasil URL:</h3>
+                
+                <div class="space-y-3">
+                    <div class="bg-black/30 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-green-400 font-semibold text-sm">Raw GitHub URL</span>
+                            <button onclick="copyToClipboard('rawUrl')" class="text-gray-400 hover:text-white transition-all">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <code id="rawUrl" class="text-sm text-gray-300 break-all"></code>
+                    </div>
+                    
+                    <div class="bg-black/30 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-blue-400 font-semibold text-sm">GitHub Pages URL</span>
+                            <button onclick="copyToClipboard('pagesUrl')" class="text-gray-400 hover:text-white transition-all">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <code id="pagesUrl" class="text-sm text-gray-300 break-all"></code>
+                    </div>
+                    
+                    <div class="bg-black/30 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-orange-400 font-semibold text-sm">jsDelivr CDN URL</span>
+                            <button onclick="copyToClipboard('cdnUrl')" class="text-gray-400 hover:text-white transition-all">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <code id="cdnUrl" class="text-sm text-gray-300 break-all"></code>
+                    </div>
+                </div>
+
+                <!-- Preview -->
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-300 mb-3">Preview Gambar:</h3>
+                    <div id="imagePreview" class="bg-black/30 rounded-lg p-6 flex items-center justify-center min-h-[200px]">
+                        <p class="text-gray-500">Gambar akan muncul di sini jika URL valid</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Examples -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i class="fas fa-code text-cyan-400"></i>
+                Contoh Penggunaan dalam HTML
+            </h2>
+            
+            <div class="space-y-6">
+                <!-- Example 1 -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3 text-green-400">Menggunakan Tag &lt;img&gt;</h4>
+                    <div class="bg-black/50 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm"><code class="text-gray-300">&lt;img src="https://raw.githubusercontent.com/username/repo/main/images/foto.png" alt="Deskripsi gambar"&gt;</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example 2 -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3 text-blue-400">Sebagai Background CSS</h4>
+                    <div class="bg-black/50 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm"><code class="text-gray-300">.hero {
+    background-image: url('https://raw.githubusercontent.com/username/repo/main/images/background.jpg');
+    background-size: cover;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example 3 -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3 text-purple-400">Di Markdown (README.md)</h4>
+                    <div class="bg-black/50 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm"><code class="text-gray-300">![Alt Text](https://raw.githubusercontent.com/username/repo/main/images/screenshot.png)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How it Works -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i class="fas fa-cogs text-pink-400"></i>
+                Cara Kerja - GitHub API
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="text-lg font-semibold mb-3 text-cyan-400">API untuk List File di Direktori</h4>
+                    <div class="bg-black/50 rounded-lg p-4 overflow-x-auto mb-4">
+                        <pre class="text-sm"><code class="text-gray-300">GET https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-sm">API ini mengembalikan daftar semua file dan folder dalam direktori yang ditentukan.</p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-3 text-green-400">Contoh Response</h4>
+                    <div class="bg-black/50 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm"><code class="text-gray-300">[
+  {
+    "name": "logo.png",
+    "path": "images/logo.png",
+    "size": 12345,
+    "type": "file",
+    "download_url": "https://raw..."
+  }
+]</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                <h4 class="font-semibold text-blue-400 mb-2"><i class="fas fa-info-circle mr-2"></i>Catatan Penting</h4>
+                <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• GitHub API memiliki rate limit 60 request/jam untuk pengguna tanpa autentikasi</li>
+                    <li>• Hanya bekerja untuk repository <strong>public</strong></li>
+                    <li>• Maksimal 1000 file per direktori</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Upload Guide - NEW SECTION -->
+        <div class="bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl p-8 border border-green-500/30 mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i class="fas fa-cloud-upload-alt text-green-400"></i>
+                Cara Upload Gambar ke GitHub
+            </h2>
+
+            <p class="text-gray-300 mb-6">
+                Untuk repository <strong class="text-green-400">faridridwan1378/varsha-catalog</strong> di direktori <strong class="text-green-400">gambar buah</strong>, berikut cara upload-nya:
+            </p>
+
+            <!-- Method Tabs -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button onclick="showUploadMethod('web')" id="tabWeb" class="upload-tab bg-green-500 text-white px-4 py-2 rounded-lg font-semibold transition-all">
+                    <i class="fas fa-globe mr-2"></i>Via Web Browser
+                </button>
+                <button onclick="showUploadMethod('git')" id="tabGit" class="upload-tab bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-semibold transition-all">
+                    <i class="fas fa-terminal mr-2"></i>Via Git CLI
+                </button>
+                <button onclick="showUploadMethod('desktop')" id="tabDesktop" class="upload-tab bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-semibold transition-all">
+                    <i class="fas fa-desktop mr-2"></i>Via GitHub Desktop
+                </button>
+                <button onclick="showUploadMethod('api')" id="tabApi" class="upload-tab bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-semibold transition-all">
+                    <i class="fas fa-code mr-2"></i>Via API
+                </button>
+            </div>
+
+            <!-- Method 1: Web Browser -->
+            <div id="methodWeb" class="upload-method">
+                <h3 class="text-xl font-bold text-green-400 mb-4">
+                    <i class="fas fa-globe mr-2"></i>Upload via GitHub Web (Paling Mudah)
+                </h3>
+                
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center font-bold shrink-0">1</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Buka Repository di Browser</h4>
+                            <a href="https://github.com/faridridwan1378/varsha-catalog" target="_blank" 
+                                class="inline-flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg text-green-400 hover:text-green-300 transition-all">
+                                <i class="fab fa-github"></i>
+                                https://github.com/faridridwan1378/varsha-catalog
+                                <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center font-bold shrink-0">2</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Navigasi ke Folder "gambar buah"</h4>
+                            <p class="text-gray-400">Klik folder <code class="bg-black/30 px-2 py-1 rounded">gambar buah</code> untuk masuk ke direktori tersebut</p>
+                            <a href="https://github.com/faridridwan1378/varsha-catalog/tree/main/gambar%20buah" target="_blank" 
+                                class="inline-flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg text-green-400 hover:text-green-300 transition-all mt-2">
+                                <i class="fas fa-folder-open"></i>
+                                Langsung ke folder "gambar buah"
+                                <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center font-bold shrink-0">3</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Klik Tombol "Add file" → "Upload files"</h4>
+                            <div class="bg-black/30 rounded-lg p-4 mt-2">
+                                <img src="https://docs.github.com/assets/cb-30231/mw-1440/images/help/repository/upload-files-button.webp" 
+                                    alt="Upload button" class="rounded-lg max-w-full" 
+                                    onerror="this.parentElement.innerHTML='<div class=\'text-center py-4\'><i class=\'fas fa-image text-gray-600 text-3xl mb-2\'></i><p class=\'text-gray-500\'>Klik tombol Add file > Upload files di pojok kanan atas</p></div>'">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center font-bold shrink-0">4</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Drag & Drop atau Pilih File Gambar</h4>
+                            <p class="text-gray-400">Seret file gambar dari komputer Anda ke area upload, atau klik "choose your files"</p>
+                            <div class="bg-black/30 border-2 border-dashed border-green-500/50 rounded-lg p-8 mt-3 text-center">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-green-400 mb-3"></i>
+                                <p class="text-gray-400">Drag files here atau klik untuk memilih</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center font-bold shrink-0">5</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Tulis Commit Message & Klik "Commit changes"</h4>
+                            <div class="bg-black/30 rounded-lg p-4 mt-2">
+                                <input type="text" value="Add new fruit images" readonly
+                                    class="w-full bg-black/50 border border-white/20 rounded-lg px-4 py-2 mb-3 text-gray-300">
+                                <button class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg font-semibold transition-all">
+                                    <i class="fas fa-check mr-2"></i>Commit changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-400 mb-2"><i class="fas fa-check-circle mr-2"></i>Selesai!</h4>
+                    <p class="text-gray-300">Gambar Anda sekarang sudah terupload dan bisa diakses dengan URL:</p>
+                    <code class="block mt-2 text-sm bg-black/30 p-3 rounded-lg text-green-400 break-all">
+                        https://raw.githubusercontent.com/faridridwan1378/varsha-catalog/main/gambar%20buah/nama-file.jpg
+                    </code>
+                </div>
+            </div>
+
+            <!-- Method 2: Git CLI -->
+            <div id="methodGit" class="upload-method hidden">
+                <h3 class="text-xl font-bold text-blue-400 mb-4">
+                    <i class="fas fa-terminal mr-2"></i>Upload via Git Command Line
+                </h3>
+                
+                <div class="space-y-4">
+                    <div class="bg-black/50 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm mb-2"># 1. Clone repository (jika belum)</p>
+                        <code class="text-green-400">git clone https://github.com/faridridwan1378/varsha-catalog.git</code>
+                    </div>
+
+                    <div class="bg-black/50 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm mb-2"># 2. Masuk ke folder repository</p>
+                        <code class="text-green-400">cd varsha-catalog</code>
+                    </div>
+
+                    <div class="bg-black/50 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm mb-2"># 3. Copy gambar ke folder "gambar buah"</p>
+                        <code class="text-green-400">cp /path/to/local/image.jpg "gambar buah/"</code>
+                    </div>
+
+                    <div class="bg-black/50 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm mb-2"># 4. Tambahkan file ke staging</p>
+                        <code class="text-green-400">git add "gambar buah/image.jpg"</code>
+                        <p class="text-gray-500 text-xs mt-1">atau gunakan <code>git add .</code> untuk semua file</p>
+                    </div>
+
+                    <div class="bg-black/50 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm mb-2"># 5. Commit perubahan</p>
+                        <code class="text-green-400">git commit -m "Add new fruit image"</code>
+                    </div>
+
+                    <div class="bg-black/50 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm mb-2"># 6. Push ke GitHub</p>
+                        <code class="text-green-400">git push origin main</code>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-400 mb-2"><i class="fas fa-info-circle mr-2"></i>Catatan</h4>
+                    <ul class="text-gray-300 text-sm space-y-1">
+                        <li>• Pastikan Git sudah terinstall di komputer</li>
+                        <li>• Anda perlu login ke GitHub via terminal</li>
+                        <li>• Gunakan Personal Access Token jika menggunakan HTTPS</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Method 3: GitHub Desktop -->
+            <div id="methodDesktop" class="upload-method hidden">
+                <h3 class="text-xl font-bold text-purple-400 mb-4">
+                    <i class="fas fa-desktop mr-2"></i>Upload via GitHub Desktop
+                </h3>
+                
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center font-bold shrink-0">1</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Download & Install GitHub Desktop</h4>
+                            <a href="https://desktop.github.com/" target="_blank" 
+                                class="inline-flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg text-purple-400 hover:text-purple-300 transition-all">
+                                <i class="fas fa-download"></i>
+                                https://desktop.github.com/
+                                <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center font-bold shrink-0">2</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Clone Repository</h4>
+                            <p class="text-gray-400">File → Clone Repository → Pilih <code class="bg-black/30 px-2 py-1 rounded">faridridwan1378/varsha-catalog</code></p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center font-bold shrink-0">3</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Buka Folder di File Explorer</h4>
+                            <p class="text-gray-400">Klik "Show in Explorer" atau "Show in Finder"</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center font-bold shrink-0">4</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Copy Gambar ke Folder "gambar buah"</h4>
+                            <p class="text-gray-400">Paste file gambar dari komputer Anda ke dalam folder tersebut</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center font-bold shrink-0">5</div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold mb-2">Commit & Push di GitHub Desktop</h4>
+                            <p class="text-gray-400">Kembali ke GitHub Desktop, tulis commit message, lalu klik "Commit to main" → "Push origin"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Method 4: API -->
+            <div id="methodApi" class="upload-method hidden">
+                <h3 class="text-xl font-bold text-orange-400 mb-4">
+                    <i class="fas fa-code mr-2"></i>Upload via GitHub API (Advanced)
+                </h3>
+                
+                <p class="text-gray-300 mb-4">Untuk upload otomatis menggunakan JavaScript/API:</p>
+
+                <div class="bg-black/50 rounded-lg p-4 overflow-x-auto">
+                    <pre class="text-sm"><code class="text-gray-300"><span class="text-purple-400">async function</span> <span class="text-yellow-400">uploadToGitHub</span>(file) {
+    <span class="text-purple-400">const</span> token = <span class="text-green-400">'YOUR_GITHUB_TOKEN'</span>;
+    <span class="text-purple-400">const</span> owner = <span class="text-green-400">'faridridwan1378'</span>;
+    <span class="text-purple-400">const</span> repo = <span class="text-green-400">'varsha-catalog'</span>;
+    <span class="text-purple-400">const</span> path = <span class="text-green-400">`gambar buah/${file.name}`</span>;
+    
+    <span class="text-gray-500">// Convert file to base64</span>
+    <span class="text-purple-400">const</span> content = <span class="text-purple-400">await</span> <span class="text-yellow-400">toBase64</span>(file);
+    
+    <span class="text-purple-400">const</span> response = <span class="text-purple-400">await</span> <span class="text-yellow-400">fetch</span>(
+        <span class="text-green-400">`https://api.github.com/repos/${owner}/${repo}/contents/${path}`</span>,
+        {
+            method: <span class="text-green-400">'PUT'</span>,
+            headers: {
+                <span class="text-green-400">'Authorization'</span>: <span class="text-green-400">`token ${token}`</span>,
+                <span class="text-green-400">'Content-Type'</span>: <span class="text-green-400">'application/json'</span>,
+            },
+            body: JSON.<span class="text-yellow-400">stringify</span>({
+                message: <span class="text-green-400">`Upload ${file.name}`</span>,
+                content: content,
+                branch: <span class="text-green-400">'main'</span>
+            })
+        }
+    );
+    
+    <span class="text-purple-400">return</span> response.<span class="text-yellow-400">json</span>();
+}</code></pre>
+                </div>
+
+                <div class="mt-6 bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
+                    <h4 class="font-semibold text-orange-400 mb-2"><i class="fas fa-key mr-2"></i>Cara Mendapatkan Token</h4>
+                    <ol class="text-gray-300 text-sm space-y-1 list-decimal list-inside">
+                        <li>Buka GitHub → Settings → Developer settings</li>
+                        <li>Personal access tokens → Tokens (classic)</li>
+                        <li>Generate new token dengan scope "repo"</li>
+                        <li>Copy dan simpan token dengan aman</li>
+                    </ol>
+                    <a href="https://github.com/settings/tokens" target="_blank" 
+                        class="inline-flex items-center gap-2 mt-3 text-orange-400 hover:text-orange-300">
+                        <i class="fas fa-external-link-alt"></i>
+                        Buka halaman token GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips -->
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i class="fas fa-lightbulb text-yellow-400"></i>
+                Tips Penting
+            </h2>
+            
+            <ul class="space-y-4">
+                <li class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Repository harus public</strong> agar gambar bisa diakses tanpa autentikasi</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Gunakan jsDelivr CDN</strong> untuk performa lebih baik dan caching</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Perhatikan case-sensitive</strong> - nama file harus sama persis (huruf besar/kecil)</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Gunakan branch yang benar</strong> - bisa "main" atau "master" tergantung repository</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fas fa-warning text-yellow-400 mt-1"></i>
+                    <span><strong>Hindari file terlalu besar</strong> - GitHub memiliki batasan ukuran file</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 text-gray-400">
+            <p>Dibuat dengan <i class="fas fa-heart text-red-400"></i> untuk membantu developer</p>
+        </footer>
+    </div>
+
+    <script>
+        function generateURLs() {
+            const username = document.getElementById('username').value.trim();
+            const repo = document.getElementById('repo').value.trim();
+            const branch = document.getElementById('branch').value.trim() || 'main';
+            const path = document.getElementById('path').value.trim();
+
+            if (!username || !repo || !path) {
+                alert('Mohon isi semua field yang diperlukan!');
+                return;
+            }
+
+            const rawUrl = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${path}`;
+            const pagesUrl = `https://${username}.github.io/${repo}/${path}`;
+            const cdnUrl = `https://cdn.jsdelivr.net/gh/${username}/${repo}@${branch}/${path}`;
+
+            document.getElementById('rawUrl').textContent = rawUrl;
+            document.getElementById('pagesUrl').textContent = pagesUrl;
+            document.getElementById('cdnUrl').textContent = cdnUrl;
+
+            document.getElementById('results').classList.remove('hidden');
+
+            // Try to load image preview
+            const previewContainer = document.getElementById('imagePreview');
+            previewContainer.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin text-2xl mb-2"></i><p>Memuat gambar...</p></div>';
+
+            const img = new Image();
+            img.onload = function() {
+                previewContainer.innerHTML = '';
+                img.className = 'max-w-full max-h-[300px] rounded-lg shadow-lg';
+                previewContainer.appendChild(img);
+            };
+            img.onerror = function() {
+                previewContainer.innerHTML = '<div class="text-center text-red-400"><i class="fas fa-exclamation-triangle text-2xl mb-2"></i><p>Gambar tidak dapat dimuat. Pastikan URL dan path sudah benar.</p></div>';
+            };
+            img.src = rawUrl;
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show temporary feedback
+                const btn = event.target.closest('button');
+                const originalIcon = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check text-green-400"></i>';
+                setTimeout(() => {
+                    btn.innerHTML = originalIcon;
+                }, 1500);
+            });
+        }
+
+        // Add enter key support
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    generateURLs();
+                }
+            });
+        });
+
+        // ==================== IMAGE BROWSER FUNCTIONS ====================
+        
+        const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp', 'ico'];
+        let currentBrowseState = {
+            username: '',
+            repo: '',
+            branch: '',
+            path: ''
+        };
+
+        function loadExample() {
+            document.getElementById('browseUsername').value = 'github';
+            document.getElementById('browseRepo').value = 'explore';
+            document.getElementById('browseBranch').value = 'main';
+            document.getElementById('browsePath').value = 'topics';
+            browseImages();
+        }
+
+        async function browseImages(customPath = null) {
+            const username = document.getElementById('browseUsername').value.trim();
+            const repo = document.getElementById('browseRepo').value.trim();
+            const branch = document.getElementById('browseBranch').value.trim() || 'main';
+            const path = customPath !== null ? customPath : document.getElementById('browsePath').value.trim();
+
+            if (!username || !repo) {
+                showError('Mohon isi Username dan Nama Repository!');
+                return;
+            }
+
+            // Update state
+            currentBrowseState = { username, repo, branch, path };
+
+            // Show loading
+            document.getElementById('browseLoading').classList.remove('hidden');
+            document.getElementById('browseResults').classList.add('hidden');
+            document.getElementById('browseError').classList.add('hidden');
+
+            try {
+                const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}?ref=${branch}`;
+                const response = await fetch(apiUrl);
+
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('Repository atau direktori tidak ditemukan. Pastikan repository public dan path benar.');
+                    } else if (response.status === 403) {
+                        throw new Error('Rate limit tercapai. Coba lagi beberapa saat.');
+                    }
+                    throw new Error('Gagal mengambil data dari GitHub');
+                }
+
+                const data = await response.json();
+                displayResults(data, path);
+
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                document.getElementById('browseLoading').classList.add('hidden');
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('browseError').classList.remove('hidden');
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        function displayResults(items, currentPath) {
+            const resultsDiv = document.getElementById('browseResults');
+            const folderList = document.getElementById('folderList');
+            const imageGrid = document.getElementById('imageGrid');
+            const noImages = document.getElementById('noImages');
+            const imageCount = document.getElementById('imageCount');
+            const currentPathSpan = document.getElementById('currentPath');
+
+            resultsDiv.classList.remove('hidden');
+            folderList.innerHTML = '';
+            imageGrid.innerHTML = '';
+
+            // Update breadcrumb
+            updateBreadcrumb(currentPath);
+
+            // Separate folders and images
+            const folders = items.filter(item => item.type === 'dir');
+            const images = items.filter(item => {
+                if (item.type !== 'file') return false;
+                const ext = item.name.split('.').pop().toLowerCase();
+                return imageExtensions.includes(ext);
+            });
+
+            // Display current path
+            currentPathSpan.textContent = currentPath ? `/${currentPath}` : '/ (root)';
+            imageCount.textContent = `${images.length} gambar, ${folders.length} folder`;
+
+            // Display folders
+            folders.forEach(folder => {
+                const folderEl = document.createElement('div');
+                folderEl.className = 'bg-yellow-500/20 hover:bg-yellow-500/30 border border-yellow-500/30 rounded-lg p-3 cursor-pointer transition-all flex items-center gap-2';
+                folderEl.innerHTML = `
+                    <i class="fas fa-folder text-yellow-400"></i>
+                    <span class="truncate text-sm">${folder.name}</span>
+                `;
+                folderEl.onclick = () => browseImages(folder.path);
+                folderList.appendChild(folderEl);
+            });
+
+            // Display images
+            if (images.length === 0) {
+                noImages.classList.remove('hidden');
+            } else {
+                noImages.classList.add('hidden');
+                images.forEach(image => {
+                    const rawUrl = `https://raw.githubusercontent.com/${currentBrowseState.username}/${currentBrowseState.repo}/${currentBrowseState.branch}/${image.path}`;
+                    
+                    const imageCard = document.createElement('div');
+                    imageCard.className = 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 rounded-xl overflow-hidden cursor-pointer transition-all group';
+                    imageCard.innerHTML = `
+                        <div class="aspect-square bg-black/30 flex items-center justify-center overflow-hidden">
+                            <img src="${rawUrl}" alt="${image.name}" 
+                                class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform"
+                                onerror="this.parentElement.innerHTML='<i class=\\'fas fa-image text-gray-600 text-3xl\\'></i>'">
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm truncate text-gray-300" title="${image.name}">${image.name}</p>
+                            <p class="text-xs text-gray-500">${formatSize(image.size)}</p>
+                        </div>
+                    `;
+                    imageCard.onclick = () => openModal(rawUrl, image.name);
+                    imageGrid.appendChild(imageCard);
+                });
+            }
+        }
+
+        function updateBreadcrumb(path) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            breadcrumb.innerHTML = '';
+
+            // Root button
+            const rootBtn = document.createElement('button');
+            rootBtn.className = 'text-cyan-400 hover:text-cyan-300 flex items-center gap-1';
+            rootBtn.innerHTML = '<i class="fas fa-home"></i> root';
+            rootBtn.onclick = () => browseImages('');
+            breadcrumb.appendChild(rootBtn);
+
+            if (path) {
+                const parts = path.split('/');
+                let currentPath = '';
+
+                parts.forEach((part, index) => {
+                    // Separator
+                    const sep = document.createElement('span');
+                    sep.className = 'text-gray-500';
+                    sep.innerHTML = '<i class="fas fa-chevron-right text-xs"></i>';
+                    breadcrumb.appendChild(sep);
+
+                    currentPath += (index > 0 ? '/' : '') + part;
+                    const pathCopy = currentPath;
+
+                    const btn = document.createElement('button');
+                    btn.className = index === parts.length - 1 
+                        ? 'text-white font-semibold' 
+                        : 'text-cyan-400 hover:text-cyan-300';
+                    btn.textContent = part;
+                    btn.onclick = () => browseImages(pathCopy);
+                    breadcrumb.appendChild(btn);
+                });
+            }
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        let currentModalUrl = '';
+
+        function openModal(url, filename) {
+            currentModalUrl = url;
+            document.getElementById('modalImage').src = url;
+            document.getElementById('modalFileName').textContent = filename;
+            document.getElementById('modalUrl').textContent = url;
+            document.getElementById('modalDownload').href = url;
+            document.getElementById('modalOpen').href = url;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.getElementById('imageModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event.target.id === 'imageModal') {
+                closeModalBtn();
+            }
+        }
+
+        function closeModalBtn() {
+            document.getElementById('imageModal').classList.add('hidden');
+            document.getElementById('imageModal').classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function copyModalUrl() {
+            navigator.clipboard.writeText(currentModalUrl).then(() => {
+                const btn = event.target.closest('button');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 1500);
+            });
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModalBtn();
+            }
+        });
+
+        // ==================== UPLOAD METHOD TABS ====================
+        function showUploadMethod(method) {
+            // Hide all methods
+            document.querySelectorAll('.upload-method').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Reset all tabs
+            document.querySelectorAll('.upload-tab').forEach(el => {
+                el.classList.remove('bg-green-500', 'bg-blue-500', 'bg-purple-500', 'bg-orange-500', 'text-white');
+                el.classList.add('bg-white/10');
+            });
+            
+            // Show selected method and highlight tab
+            const methodEl = document.getElementById('method' + method.charAt(0).toUpperCase() + method.slice(1));
+            const tabEl = document.getElementById('tab' + method.charAt(0).toUpperCase() + method.slice(1));
+            
+            if (methodEl) methodEl.classList.remove('hidden');
+            
+            if (tabEl) {
+                tabEl.classList.remove('bg-white/10');
+                const colors = {
+                    'web': 'bg-green-500',
+                    'git': 'bg-blue-500',
+                    'desktop': 'bg-purple-500',
+                    'api': 'bg-orange-500'
+                };
+                tabEl.classList.add(colors[method], 'text-white');
+            }
+        }
+
+        // Auto-load images on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Automatically browse images with default values
+            browseImages();
+        });
+    </script>
+</body>
+</html>
